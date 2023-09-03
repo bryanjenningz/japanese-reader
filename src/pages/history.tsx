@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import { Alert } from "~/components/Alert";
 import { ArrowBackIcon } from "~/icons/ArrowBackIcon";
 import { useHistoryAction, useHistoryState } from "~/stores/historyStore";
 
@@ -8,6 +10,7 @@ export default function History() {
   const entries = useHistoryState((x) => x.entries);
   const selectEntry = useHistoryAction((x) => x.selectEntry);
   const clearAll = useHistoryAction((x) => x.clearAll);
+  const [showClearAllAlert, setShowClearAllAlert] = useState(false);
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-black text-white">
@@ -25,12 +28,40 @@ export default function History() {
 
           <button
             className="flex h-12 w-fit items-center justify-center px-2 text-sm  uppercase"
-            onClick={clearAll}
+            onClick={() => setShowClearAllAlert(true)}
           >
             Clear all
           </button>
         </div>
       </header>
+
+      {showClearAllAlert && (
+        <Alert onClickOverlay={() => setShowClearAllAlert(false)}>
+          <div className="flex flex-col gap-3 bg-slate-700 p-5">
+            <h2 className="text-xl font-bold">Clear History</h2>
+
+            <p>Are you sure you want to clear all Japanese text history?</p>
+
+            <div className="flex justify-end gap-3">
+              <button
+                className="p-2 text-sm font-bold uppercase text-blue-500"
+                onClick={() => setShowClearAllAlert(false)}
+              >
+                No
+              </button>
+              <button
+                className="p-2 text-sm font-bold uppercase text-blue-500"
+                onClick={() => {
+                  clearAll();
+                  setShowClearAllAlert(false);
+                }}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </Alert>
+      )}
 
       <div className="w-full max-w-2xl">
         <section className="flex flex-col pt-14">
