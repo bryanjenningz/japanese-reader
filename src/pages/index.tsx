@@ -1,11 +1,25 @@
 import Link from "next/link";
+import { useRef, useState } from "react";
+import { SelectableReadingText } from "~/components/SelectableReadingText";
+import { WordEntryList } from "~/components/WordEntryList";
+import { type WordSearchResult } from "~/dictionary/search";
+import { useSearch } from "~/dictionary/useSearch";
 import { HistoryIcon } from "~/icons/HistoryIcon";
 import { PasteContentGoIcon } from "~/icons/PasteContentGoIcon";
 import { useHistoryAction, useHistoryState } from "~/stores/historyStore";
 
+const MAX_WORD_SIZE = 20;
+
 export default function Home() {
   const selectedEntry = useHistoryState((x) => x.selectedEntry);
   const addEntry = useHistoryAction((x) => x.addEntry);
+  const { selectedText, wordEntries, selectedTextIndex, setSelectedTextIndex } =
+    useSelectedText(selectedEntry?.text ?? "");
+  const selectedTextElement = useRef<HTMLElement | null>(null);
+  const selectedTextElementBottom = selectedTextElement.current
+    ? selectedTextElement.current.getBoundingClientRect().bottom +
+      window.scrollY
+    : undefined;
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-black text-white">
@@ -48,11 +62,49 @@ export default function Home() {
         </div>
       </header>
 
-      <p className="w-full max-w-2xl px-4 pb-60 pt-14 text-xl">
-        {selectedEntry?.text.split("").map((char, i) => {
-          return <span key={`${char}-${i}`}>{char}</span>;
-        })}
-      </p>
+      <div className="flex w-full max-w-2xl flex-col">
+        <SelectableReadingText
+          readingText={selectedEntry?.text ?? ""}
+          selectedTextIndex={selectedTextIndex}
+          selectedTextElement={selectedTextElement}
+          setSelectedTextIndex={setSelectedTextIndex}
+          selectedTextLength={selectedText.length}
+        />
+
+        <WordEntryList
+          selectedTextElementBottom={selectedTextElementBottom}
+          wordEntries={wordEntries}
+        />
+      </div>
     </main>
   );
+}
+
+function useSelectedText(readingText: string) {
+  const [selectedTextIndex, setSelectedTextIndex] = useState<null | number>(
+    null,
+  );
+  const search = useSearch();
+  const { selectedTextLength, wordEntries } = ((): WordSearchResult => {
+    if (selectedTextIndex === null) {
+      return { selectedTextLength: 1, wordEntries: [] };
+    }
+    const text = readingText
+      .slice(selectedTextIndex, selectedTextIndex + MAX_WORD_SIZE)
+      .trim();
+    return search(text);
+  })();
+  const selectedText =
+    typeof selectedTextIndex === "number"
+      ? readingText.slice(
+          selectedTextIndex,
+          selectedTextIndex + selectedTextLength,
+        )
+      : "";
+  return {
+    selectedText,
+    wordEntries,
+    selectedTextIndex,
+    setSelectedTextIndex,
+  };
 }
