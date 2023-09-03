@@ -32,8 +32,8 @@ const useHistoryStore = create<HistoryStore>()(
       },
 
       addEntry: (entry: HistoryEntry) => {
-        set(({ selectedEntry, entries }) => ({
-          selectedEntry: selectedEntry ?? entry,
+        set(({ entries }) => ({
+          selectedEntry: entry,
           entries: [entry, ...entries],
         }));
       },
