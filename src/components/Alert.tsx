@@ -7,7 +7,7 @@ export function Alert({
 }) {
   return (
     <>
-      <div className="fixed inset-0 z-10 bg-black opacity-25"></div>
+      <div className="fixed inset-0 z-10 bg-black opacity-50"></div>
 
       <div
         className="fixed inset-0 z-20 flex items-center justify-center"
