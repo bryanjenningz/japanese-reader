@@ -73,11 +73,9 @@ export default function History() {
               <button
                 key={entry.time}
                 className="relative flex select-none flex-col gap-1 border-b border-slate-700 px-4 py-2 last:border-b-0"
-                onClick={(event) => {
-                  if (event.target === event.currentTarget) {
-                    selectEntry(entry);
-                    void router.push("/");
-                  }
+                onClick={() => {
+                  selectEntry(entry);
+                  void router.push("/");
                 }}
                 onContextMenu={(event) => {
                   event.preventDefault();
