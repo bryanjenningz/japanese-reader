@@ -84,7 +84,7 @@ export default function History() {
                   setContextMenuIndex(index);
                 }}
               >
-                <h2 className="text-sm font-bold text-blue-500">
+                <h2 className="text-left text-sm font-bold text-blue-500">
                   {formatTime(entry.time)}
                 </h2>
                 <p className="line-clamp-4 text-sm">{entry.text}</p>
