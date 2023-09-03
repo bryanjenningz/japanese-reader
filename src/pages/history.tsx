@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Alert } from "~/components/Alert";
+import { ContextMenu } from "~/components/ContextMenu";
 import { ArrowBackIcon } from "~/icons/ArrowBackIcon";
 import { useHistoryAction, useHistoryState } from "~/stores/historyStore";
 
@@ -9,8 +10,10 @@ export default function History() {
   const router = useRouter();
   const entries = useHistoryState((x) => x.entries);
   const selectEntry = useHistoryAction((x) => x.selectEntry);
+  const removeEntry = useHistoryAction((x) => x.removeEntry);
   const clearAll = useHistoryAction((x) => x.clearAll);
   const [showClearAllAlert, setShowClearAllAlert] = useState(false);
+  const [contextMenuIndex, setContextMenuIndex] = useState(-1);
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-black text-white">
@@ -65,20 +68,40 @@ export default function History() {
 
       <div className="w-full max-w-2xl">
         <section className="flex flex-col pt-14">
-          {entries?.map((entry) => {
+          {entries?.map((entry, index) => {
             return (
               <button
                 key={entry.time}
-                className="flex select-none flex-col gap-1 border-b border-slate-700 px-4 py-2 last:border-b-0"
-                onClick={() => {
-                  selectEntry(entry);
-                  void router.push("/");
+                className="relative flex select-none flex-col gap-1 border-b border-slate-700 px-4 py-2 last:border-b-0"
+                onClick={(event) => {
+                  if (event.target === event.currentTarget) {
+                    selectEntry(entry);
+                    void router.push("/");
+                  }
+                }}
+                onContextMenu={(event) => {
+                  event.preventDefault();
+                  setContextMenuIndex(index);
                 }}
               >
                 <h2 className="text-sm font-bold text-blue-500">
                   {formatTime(entry.time)}
                 </h2>
                 <p className="line-clamp-4 text-sm">{entry.text}</p>
+
+                {contextMenuIndex === index && (
+                  <ContextMenu onClickOut={() => setContextMenuIndex(-1)}>
+                    <button
+                      className="w-full bg-slate-700 py-2"
+                      onClick={() => {
+                        setContextMenuIndex(-1);
+                        removeEntry(entry);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </ContextMenu>
+                )}
               </button>
             );
           })}
