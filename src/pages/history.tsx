@@ -38,7 +38,7 @@ export default function History() {
             return (
               <button
                 key={entry.time}
-                className="flex select-none flex-col gap-1 border-b border-slate-800 px-4 py-2 last:border-b-0"
+                className="flex select-none flex-col gap-1 border-b border-slate-700 px-4 py-2 last:border-b-0"
                 onClick={() => {
                   selectEntry(entry);
                   void router.push("/");
