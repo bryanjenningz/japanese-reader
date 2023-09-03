@@ -4,7 +4,7 @@ import { useStore } from "~/stores/useStore";
 
 type HistoryState = {
   selectedEntry: HistoryEntry | undefined;
-  history: HistoryEntry[];
+  entries: HistoryEntry[];
 };
 
 type HistoryEntry = {
@@ -25,32 +25,32 @@ const useHistoryStore = create<HistoryStore>()(
   persist(
     (set) => ({
       selectedEntry: undefined,
-      history: [],
+      entries: [],
 
       selectEntry: (entry: HistoryEntry) => {
         set({ selectedEntry: entry });
       },
 
       addEntry: (entry: HistoryEntry) => {
-        set(({ history }) => ({ history: [entry, ...history] }));
+        set(({ entries }) => ({ entries: [entry, ...entries] }));
       },
 
       removeEntry: (entry: HistoryEntry) => {
-        set(({ selectedEntry, history }) => ({
+        set(({ selectedEntry, entries }) => ({
           selectedEntry:
             selectedEntry?.text === entry.text &&
             selectedEntry?.time === entry.time
               ? undefined
               : selectedEntry,
 
-          history: history.filter(
+          entries: entries.filter(
             (e) => e.text !== entry.text || e.time !== entry.time,
           ),
         }));
       },
 
       clearAll: () => {
-        set({ history: [] });
+        set({ entries: [] });
       },
     }),
     { name: "history" },
