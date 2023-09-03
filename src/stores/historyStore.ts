@@ -32,25 +32,32 @@ const useHistoryStore = create<HistoryStore>()(
       },
 
       addEntry: (entry: HistoryEntry) => {
-        set(({ entries }) => ({ entries: [entry, ...entries] }));
-      },
-
-      removeEntry: (entry: HistoryEntry) => {
         set(({ selectedEntry, entries }) => ({
-          selectedEntry:
-            selectedEntry?.text === entry.text &&
-            selectedEntry?.time === entry.time
-              ? undefined
-              : selectedEntry,
-
-          entries: entries.filter(
-            (e) => e.text !== entry.text || e.time !== entry.time,
-          ),
+          selectedEntry: selectedEntry ?? entry,
+          entries: [entry, ...entries],
         }));
       },
 
+      removeEntry: (entry: HistoryEntry) => {
+        set(({ selectedEntry, entries }) => {
+          const equals = (entry1: HistoryEntry, entry2: HistoryEntry) =>
+            entry1.text === entry2.text && entry1.time === entry2.time;
+
+          const newEntries = entries.filter((e) => !equals(e, entry));
+
+          return {
+            selectedEntry:
+              selectedEntry && equals(selectedEntry, entry)
+                ? newEntries[0]
+                : selectedEntry,
+
+            entries: newEntries,
+          };
+        });
+      },
+
       clearAll: () => {
-        set({ entries: [] });
+        set({ selectedEntry: undefined, entries: [] });
       },
     }),
     { name: "history" },
