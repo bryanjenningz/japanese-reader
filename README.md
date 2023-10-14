@@ -18,14 +18,14 @@ Built with [React](https://react.dev), [TypeScript](https://typescriptlang.org),
 ## Screenshots
 
 <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-  <img width="200" src="screenshots/reader-empty.png" alt="" />
-  <img width="200" src="screenshots/reader-text.png" alt="" />
-  <img width="200" src="screenshots/reader-single-definition.png" alt="" />
-  <img width="200" src="screenshots/reader-multiple-definitions.png" alt="" />
-  <img width="200" src="screenshots/reader-same-definitions-different-kanji.png" alt="" />
-  <img width="200" src="screenshots/history.png" alt="" />
-  <img width="200" src="screenshots/history-clear-all.png" alt="" />
-  <img width="200" src="screenshots/history-longpress-delete.png" alt="" />
+  <img width="200" src="screenshots/reader-empty.png" alt="Empty reader screen" />
+  <img width="200" src="screenshots/reader-text.png" alt="Reader with text" />
+  <img width="200" src="screenshots/reader-single-definition.png" alt="Reader with single definition" />
+  <img width="200" src="screenshots/reader-multiple-definitions.png" alt="Reader with multiple definitions" />
+  <img width="200" src="screenshots/reader-same-definitions-different-kanji.png" alt="Reader with same definition and different kanji" />
+  <img width="200" src="screenshots/history.png" alt="History page" />
+  <img width="200" src="screenshots/history-clear-all.png" alt="Clear all history modal" />
+  <img width="200" src="screenshots/history-longpress-delete.png" alt="Delete a single history entry with long-press on mobile or right-click on desktop" />
 </div>
 
 ## Credits
