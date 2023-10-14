@@ -10,9 +10,11 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <title>Japanese Reader</title>
         <meta
           name="description"
-          content="A mobile-focused Japanese reader web app built with React, TypeScript, Next.js, TailwindCSS, and Zustand. Initialized with create-t3-app."
+          content="A mobile-focused Japanese reader web app."
         />
         <link rel="icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#000" />
+        <link rel="manifest" href="/app.webmanifest" />
       </Head>
       <Component {...pageProps} />
     </>
