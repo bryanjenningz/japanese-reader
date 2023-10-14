@@ -43,7 +43,7 @@ export function SelectableReadingText({
 
   return (
     <p
-      className="grow p-4 pb-48 text-2xl"
+      className="grow px-4 pb-48 pt-12 text-2xl"
       ref={paragraphRef}
       onClick={(e) => {
         if (e.target !== e.currentTarget) return;
