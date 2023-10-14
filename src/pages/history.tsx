@@ -17,7 +17,7 @@ export default function History() {
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-black text-white">
-      <header className="fixed left-0 right-0 top-0 flex h-12 w-full items-center justify-center bg-inherit">
+      <header className="fixed left-0 right-0 top-0 z-10 flex h-12 w-full items-center justify-center bg-inherit">
         <div className="flex h-full w-full max-w-2xl items-center justify-between">
           <Link
             href="/"
@@ -27,10 +27,10 @@ export default function History() {
             <ArrowBackIcon />
           </Link>
 
-          <h1 className="grow px-4 text-lg font-bold">History</h1>
+          <h1 className="grow pr-4 text-lg font-bold">History</h1>
 
           <button
-            className="flex h-12 w-fit items-center justify-center px-2 text-sm  uppercase"
+            className="flex h-12 w-fit items-center justify-center px-4 text-sm uppercase"
             onClick={() => setShowClearAllAlert(true)}
           >
             Clear all
@@ -67,7 +67,7 @@ export default function History() {
       )}
 
       <div className="w-full max-w-2xl">
-        <section className="flex flex-col pt-14">
+        <section className="flex flex-col pt-12">
           {entries?.map((entry, index) => {
             return (
               <button
