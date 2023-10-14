@@ -4,6 +4,15 @@ A mobile-focused offline-mode Japanese reader web app.
 
 Built with [React](https://react.dev), [TypeScript](https://typescriptlang.org), [Next.js](https://nextjs.org), [TailwindCSS](https://tailwindcss.com), and [Zustand](https://github.com/pmndrs/zustand). Initialized with [create-t3-app](https://create.t3.gg).
 
+## Features
+
+- Paste text from clipboard
+- Look up Japanese words with pitch accent, conjugation, and multiple readings
+- Save and view text history
+- Clear all text history
+- Delete individual text history entries (long-press history entry on mobile, right-click history entry on desktop)
+- Installable progressive web app that works entirely offline
+
 ## Screenshots
 
 <div style="display: flex; flex-wrap: wrap; gap: 8px;">
