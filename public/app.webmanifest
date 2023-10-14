@@ -5,7 +5,7 @@
   "display": "standalone",
   "background_color": "#000",
   "theme_color": "#000",
-  "description": "A mobile-focused Japanese reader web app.",
+  "description": "A mobile-focused offline-mode Japanese reader web app.",
   "icons": [
     {
       "src": "/favicon-16x16.png",

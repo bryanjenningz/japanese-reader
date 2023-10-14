@@ -13,7 +13,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         <title>Japanese Reader</title>
         <meta
           name="description"
-          content="A mobile-focused Japanese reader web app."
+          content="A mobile-focused offline-mode Japanese reader web app."
         />
         <link rel="icon" href="/favicon.ico" />
         <meta name="theme-color" content="#000" />
