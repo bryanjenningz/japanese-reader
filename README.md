@@ -25,3 +25,10 @@ Built with [React](https://react.dev), [TypeScript](https://typescriptlang.org),
   <img width="200" src="screenshots/history-clear-all.png" alt="" />
   <img width="200" src="screenshots/history-longpress-delete.png" alt="" />
 </div>
+
+## Credits
+
+- [Pleco](https://pleco.com) for design inspiration
+- [JMdict/EDICT](https://www.edrdg.org/wiki/index.php/JMdict-EDICT_Dictionary_Project) for the word dictionary
+- [Rikaikun](https://github.com/melink14/rikaikun) for the formatted word dictionary, word dictionary index, verb deconjugation code, and other pieces of code
+- [Kanjium](https://github.com/mifunetoshiro/kanjium) for the pitch accent dictionary
