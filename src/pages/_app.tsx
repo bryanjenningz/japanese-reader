@@ -2,8 +2,11 @@ import { type AppType } from "next/dist/shared/lib/utils";
 import Head from "next/head";
 
 import "~/styles/globals.css";
+import { useServiceWorker } from "~/utils/useServiceWorker";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
+  useServiceWorker();
+
   return (
     <>
       <Head>
